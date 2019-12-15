@@ -30,22 +30,24 @@ def get_valid_subreddits(reddit):
 def ensure_not_child_of_bot_comment(comment):
     """This ensures that the bot is not replying to a thread whose parent is from the bot.
     Mainly to avoid spam"""
+    bots_thread = True
     try:
         parent = comment.parent()
-        logger.debug(f"The parent is {parent.body} of the comment {comment.body}")
         if parent.author.name == "mc_bc_bot":
-            return False
+            bots_thread = False
+        logger.debug(f"The parent is {parent} of the comment {comment}")
         ensure_not_child_of_bot_comment(parent)
+        return bots_thread
     except AttributeError as e:
         if "'Submission' object has no attribute 'parent'" in str(e):
-            return True
+            return
         raise
 
 
 @cachetools.cached(cache)
 def get_undesireables_list():
     """Parse the json file with the accounts to which this bot should not reply to"""
-    with open(pathlib.Path(__file__).parent / "content" / "triggers.json", "r") as triggers:
+    with open(pathlib.Path(__file__).parents[1] / "content" / "triggers.json", "r") as triggers:
         return json.load(triggers)['undesirable']
 
 
