@@ -45,10 +45,10 @@ def ensure_not_child_of_bot_comment(comment):
 
 
 @cachetools.cached(cache)
-def get_undesireables_list():
-    """Parse the json file with the accounts to which this bot should not reply to"""
+def get_triggers_from_json():
+    """Parse the json file which contains information about the triggers"""
     with open(pathlib.Path(__file__).parents[1] / "content" / "triggers.json", "r") as triggers:
-        return json.load(triggers)['undesirable']
+        return json.load(triggers)
 
 
 def valid_comment(comment):
@@ -56,7 +56,12 @@ def valid_comment(comment):
     1) Any of its parents should not have already been replied to by the mc_bc_bot
     2) The comment itself should not have been made by someone in the list"""
     if ensure_not_child_of_bot_comment(comment) is True:
-        if comment.author.name not in get_undesireables_list():
+        if comment.author.name not in get_triggers_from_json()['undesirable']:
             return True
+
+
+def is_trigger_comment(comment):
+    """Verifies if the comment is one of the bot triggers"""
+    return any(ele in comment.body for ele in get_triggers_from_json()['triggered_by'])
 
 
