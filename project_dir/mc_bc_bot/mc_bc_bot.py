@@ -1,7 +1,8 @@
 import asyncio
 import time
 from project_dir.mc_bc_bot.utils.general_utilities import get_logger, get_argument_parser
-from project_dir.mc_bc_bot.core.reddit import get_reddit_object
+from project_dir.mc_bc_bot.core.reddit import get_reddit_object, valid_comment,\
+                                              SUBREDDITS
 from project_dir.mc_bc_bot.version import __version__
 import sys
 import praw
@@ -15,13 +16,10 @@ async def count():
 async def main(reddit=None, twitter=None, version=None):
     if reddit is True:
         reddit = get_reddit_object()
-
-        subreddit = reddit.subreddit('CricketShitpost')
-        for submission in subreddit.stream.submissions():
-            comment_queue = submission.comments[:]  # Seed with top-level
-            while comment_queue:
-                comment = comment_queue.pop(0)
-                print(comment.body)
+        required_subreddits = reddit.subreddit("+".join(SUBREDDITS))
+        for comment in required_subreddits.stream.comments(skip_existing=True):
+            if valid_comment(comment) is True:
+                logger.info(comment.body)
 
         await asyncio.gather(count(), count(), count())
 
