@@ -1,0 +1,4 @@
+**/__build_artifacts__
+**/.idea
+**/*/__pycache__
+**/project_dir/mc_bc_bot/log_dir
