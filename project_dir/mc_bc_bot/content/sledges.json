@@ -1,65 +1,31 @@
-[
-  ("Merv Hughes", "Graham Gooch","I'll bowl you a f***ing piano, you Pommie p***, let's see if you can play that",""),
-
-
-  {"perpetrator": "McGrath",
-  "Atherton","No, mate, at the other end.","McGrath: Athers, it would help if you got rid of the s**t at the end of your bat.\nAtherton looks at the bottom of his bat"},
-
-  ("Bill Woodfull",
-  "Douglas Jardine","Now which of you bastards called this bastard a bastard?", "England captain Douglas Jardine complained to counterpart Bill Woodfull about Australian players swearing at him"},
-
-  ("Shane Warne",
-  "Paul Collingwood","You’ve got an MBE, right? For scoring 17 at the Oval? That’s embarrassing.", "Every member of England’s 2005 Ashes winning team were awarded MBEs. This included Paul Collingwood whose sole contribution was scoring 17 at the Oval."},
-
-  ("Jimmy Ormond",
-  "Mark Waugh","Maybe not, but at least I’m the best player in my own family", "Waugh: “There’s no way you’re good enough to play for England.”"},
-
-  ("Fred Trueman",
-  "Australian batsmen","Don’t bother shutting the gate, son, you’ll be back soon.", ""},
-
-  ("Ian Botham",
-  "Rodney Hogg","I know you think I’m great Hoggy, but no need to get down on your knees.", "After Hogg lost his balance while bowling and fell at Botham’s feet:"},
-
-  ("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-  ("Dennis Lillee",
-  "Geoff Boycott","Geoffrey Boycott is the only fellow I’ve met who fell in love with himself at a young age and has remained faithful ever since.", ""},
-
-("Ian Botham",
-  "Rod Marsh","The wife’s fine, but the kids are retarded.", "Marsh: “How’s your wife and my kids?”"},
-
-("Michael Atherton",
-  "Ian Healy","When in Rome, dear boy", "Healy: “You’re a f***ing cheat.”"},
-
-("Steve Waugh",
-  "himself","Oh, I get it. Nobody’s talking to Steve. Okay! I’ll talk to my f***ing self!", "After realising Atherton’s men wouldn’t sledge him:"},
-
-("Merv Hughes",
-  "Graeme Hick","If you turn the bat over there’s instructions on the back", ""},
-
-("Ian Healy",
-  "Nasser Hussain","That could be anywhere inside a three-mile radius.", "After Steve Waugh instructed Ricky Ponting to field under Nasser Hussain’s nose:"},
-
-("Allan Border",
-  "Robin Smith","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"},
-
-("Craig McDermott",
-  "Phil Tufnell","You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?", "After getting bowled by Phil Tufnell:"}
-
-]
+{"No, mate, at the other end.”":["Glenn McGrath","Michael Atherton","McGrath: “Athers, it would help if you got rid of the s**t at the end of your bat.” (Atherton looks at the bottom of his bat)."],
+"Now which of you bastards called this bastard a bastard?”":["Bill Woodfull","Douglas Jardine","England captain Douglas Jardine complained to counterpart Bill Woodfull about Australian players swearing at him, to which Woodfull replied:"],
+"You’ve got an MBE, right? For scoring 17 at the Oval? That’s embarrassing.”":["Shane Warne","Paul Collingwood","Every member of England’s 2005 Ashes winning team were awarded MBEs. This included Paul Collingwood whose sole contribution was scoring 17 at the Oval."],
+"Maybe not, but at least I’m the best player in my own family.”":["Jimmy Ormond","Mark Waugh","Waugh: “There’s no way you’re good enough to play for England.”"],
+"Don’t bother shutting the gate, son, you’ll be back soon.”":["Fred Trueman","Australian batsman",""],
+"I know you think I’m great Hoggy, but no need to get down on your knees.”":["Ian Botham","Rodney Hogg","After Hogg lost his balance while bowling and fell at Botham’s feet:"],
+"You’ve got to bat on this in a minute, Tuffers. Hospital food suit you?”":["Craig McDermott","Phil Tufnell","After getting bowled by Phil Tufnell:"],
+"Geoffrey Boycott is the only fellow I’ve met who fell in love with himself at a young age and has remained faithful ever since.”":["Dennis Lillee","Geoff Boycott",""],
+"The wife’s fine, but the kids are retarded.”":["Ian Botham","Rod Marsh","Marsh: “How’s your wife and my kids?”"],
+"When in Rome, dear boy.”":["Michael Atherton","Ian Healy","Healy: “You’re a f***ing cheat.”"],
+"Oh, I get it. Nobody’s talking to Steve. Okay! I’ll talk to my f***ing self!”":["Steve Waugh","himself","After realising Atherton’s men wouldn’t sledge him:"],
+"If you turn the bat over there’s instructions on the back.”":["Merv Hughes","Graeme Hick",""],
+"That could be anywhere inside a three-mile radius.”":["Ian Healy","Nasser Hussain","After Steve Waugh instructed Ricky Ponting to field under Nasser Hussain’s nose:"],
+"What do you think this is, a f***ing tea party? No, you can’t have a f***ing glass of water, you can f***ing wait like the rest of us.”":["Allan Border","Robin Smith","After Smith asked for a drink during the 1989 Trent Bridge Test:"],
+"Sorry, Doctor, she slipped.”":["Ernie Jones","WG Grace","After clipping Grace’s beard with a nasty bouncer:"],
+"Get back to the slips, Ponting. Who do you think you are, Steve Waugh?”":["Michael Vaughan","Ricky Ponting","Welcomed to the crease with a gobful from Ponting, England captain Michael Vaughan pulled no punches:"],
+"Hell, Gatt, move out of the way, I can’t see the stumps.”":["Dennis Lillee","Mike Gatting",""],
+"Oi, Tufnell! Can I borrow your brain? I’m building an idiot.”":["Australian fan","Phil Tufnell",""],
+"You’re s**t Hayden, and so is your chicken casserole.”":["English fan","Aussie opener and cook book author Matthew Hayden",""],
+"Hey Merv, we make a fine pair. I can’t f***ing bat and you can’t f***ing bowl.”":["Robin Smith","Merv Hughes","Hughes: “You can’t f***ing bat.” Smith hits Hughes for four."],
+"Neither have you.”":["Robin Smith","Merv Hughes","Four years later Robin Smith got the better of Hughes again: Hughes: “It’s four years since I bowled to you and you haven’t improved.” Smith hits Hughes for four."],
+"Get ready for a broken f***ing arm.”":["Michael Clarke","James Anderson",""],
+"Steele: Take a good look at this a*** of mine, you’ll see plenty of it this summer":["David Steele","Rodney Marsh","David Steele’s successful prediction to Rodney Marsh —"],
+"Tufnell: Are you f***ing deaf as well?":["Phil Tufnell","the umpire","Tufnell: Are you blind Umpire: I beg your pardon"],
+"I don’t mind this lot (the Australian slips cordon) chirping at me but you’re just the bus driver.”":["Nasser Hussain","Justin Langer",""],
+"Aye, and it was wasted on you.”":["Fred Trueman","batsman","Batsman: “That was a very good ball, Fred.”"],
+"If it had been a cheese roll, it wouldn’t have got past him.”":["Graham Gooch","Mike Gatting","Gatting was the victim of some friendly fire after being bowled by Warne’s “ball of the century”."],
+"The other advantage England have when Tufnell is bowling is that he isn’t fielding.”":["Ian Chappell","Phil Tufnell","Chappelli proved as adept sledging from the commentary box as he did the field."],
+"Hookes would later hit Greig for five consecutive boundaries.":["David Hookes","Tony Greig","Greig: “When are your balls going to drop, sonny?” Hookes: “I don’t know, but at least I’m playing cricket for my own country.”"],
+"Would you like me to bowl a piano and see if you can play that?”":["Merv Hughes","Graham Gooch",""],
+"Bell (tersely): I’ve been called worse.":["Shane Warne","Ian Bell","Warne and Clarke watched “American Pie” and decided to sledge Bell with “Sherminator” references throughout the series. It seemed to get under the Englishman’s skin. Warne: You don’t like being called the Sherminator do you?"]}
