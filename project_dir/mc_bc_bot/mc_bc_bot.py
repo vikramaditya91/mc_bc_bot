@@ -20,7 +20,7 @@ async def main(reddit=None, twitter=None, version=None, verbose=None):
         reddit_object = get_reddit_object()
         required_subreddits = reddit_object.subreddit("+".join(SUBREDDITS))
         for comment in required_subreddits.stream.comments():
-            if valid_comment(comment) is True:
+            if await valid_comment(comment) is True:
                 if is_trigger_comment(comment) is False:
                     print(comment.body)
                     comments += 1

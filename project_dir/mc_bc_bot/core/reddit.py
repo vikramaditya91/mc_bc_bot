@@ -3,6 +3,7 @@ import json
 import cachetools
 import pathlib
 import logging
+import asyncio
 
 SUBREDDITS = ['EmergingCricket']
 cache = cachetools.TTLCache(maxsize=100, ttl=3600)
@@ -27,7 +28,7 @@ def get_valid_subreddits(reddit):
     return subreddits
 
 
-def ensure_not_child_of_bot_comment(comment):
+async def ensure_not_child_of_bot_comment(comment):
     """This ensures that the bot is not replying to a thread whose parent is from the bot.
     Mainly to avoid spam"""
     bots_thread = True
@@ -35,7 +36,6 @@ def ensure_not_child_of_bot_comment(comment):
         parent = comment.parent()
         if parent.author.name == "mc_bc_bot":
             bots_thread = False
-        logger.debug(f"The parent is {parent} of the comment {comment}")
         ensure_not_child_of_bot_comment(parent)
         return bots_thread
     except AttributeError as e:
@@ -51,11 +51,11 @@ def get_triggers_from_json():
         return json.load(triggers)
 
 
-def valid_comment(comment):
+async def valid_comment(comment):
     """A valid comment should satisfy the following criteria
     1) Any of its parents should not have already been replied to by the mc_bc_bot
     2) The comment itself should not have been made by someone in the list"""
-    if ensure_not_child_of_bot_comment(comment) is True:
+    if await ensure_not_child_of_bot_comment(comment) is True:
         if comment.author.name not in get_triggers_from_json()['undesirable']:
             return True
 
@@ -63,5 +63,6 @@ def valid_comment(comment):
 def is_trigger_comment(comment):
     """Verifies if the comment is one of the bot triggers"""
     return any(ele in comment.body for ele in get_triggers_from_json()['triggered_by'])
+
 
 
