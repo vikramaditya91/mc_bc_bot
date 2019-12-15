@@ -65,4 +65,6 @@ def is_trigger_comment(comment):
     return any(ele in comment.body for ele in get_triggers_from_json()['triggered_by'])
 
 
+def reply_to_said_comment(comment):
 
+    get_random_quote()
