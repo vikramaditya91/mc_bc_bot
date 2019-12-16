@@ -38,7 +38,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Vikramaditya Gaonkar** - *Initial work* - [vikramaditya91](https://github.com/vikramaditya91)
+* **Vikramaditya Gaonkar** - [vikramaditya91](https://github.com/vikramaditya91)
 
 
 ## License
@@ -47,7 +47,6 @@ This project is licensed under the Beer-ware [License](License.md).
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+* This idea behind this bot was inspired by the [bobby b bot](https://github.com/bobby-b-bot)
+* The sledges have been obtained from multiple sources
+  * [Fox Sports](https://www.foxsports.com.au/cricket/the-ashes/the-ashes-2015-australia-and-englands-greatest-ashes-sledges/news-story/762252c18e2c632815b38f672bb56a08)
