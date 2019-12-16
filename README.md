@@ -43,15 +43,8 @@ Add additional notes about how to deploy this on a live system
 
 ## License
 
-This project is licensed under the Beer-ware License 
-/*
- * ----------------------------------------------------------------------------
- * "THE BEER-WARE LICENSE" (Revision 42):
- * <phk@FreeBSD.ORG> wrote this file.  As long as you retain this notice you
- * can do whatever you want with this stuff. If we meet some day, and you think
- * this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
- * ----------------------------------------------------------------------------
- */
+This project is licensed under the Beer-ware [License](License.md). 
+
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
