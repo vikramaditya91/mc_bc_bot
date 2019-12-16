@@ -47,6 +47,8 @@ This project is licensed under the Beer-ware [License](License.md).
 
 ## Acknowledgments
 
-* This idea behind this bot was inspired by the [bobby b bot](https://github.com/bobby-b-bot)
-* The sledges have been obtained from multiple sources
+* This was inspired by the [bobby b bot](https://github.com/bobby-b-bot)
+* The sledges are sourced from
   * [Fox Sports](https://www.foxsports.com.au/cricket/the-ashes/the-ashes-2015-australia-and-englands-greatest-ashes-sledges/news-story/762252c18e2c632815b38f672bb56a08)
+  * [SportingNews](https://www.sportingnews.com/au/cricket/list/ten-best-cricketing-sledges-in-history-warning-contains-coarse-language/h6dnke5x19vo1el7rg13bs695)
+  * [Cricket365](https://www.cricket365.com/cricket-features/watch-the-windows-seven-of-the-best-cricket-sledges/)
