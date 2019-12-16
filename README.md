@@ -1,6 +1,6 @@
 # MC BC BOT
 
-A simple bot which replies with the choiciest [sledges](https://en.wikipedia.org/wiki/Sledging_(cricket%29) when summoned.
+A simple bot which replies with the choiciest [sledges](https://en.wikipedia.org/wiki/Sledging_(cricket)) when summoned.
 
 
 ## Getting Started
