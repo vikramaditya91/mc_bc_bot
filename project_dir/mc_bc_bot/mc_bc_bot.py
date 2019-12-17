@@ -2,7 +2,7 @@ import asyncio
 import time
 from project_dir.mc_bc_bot.utils.general_utilities import get_argument_parser, init_logger
 from project_dir.mc_bc_bot.core.reddit import get_reddit_object, valid_comment,\
-                                              SUBREDDITS, is_trigger_comment
+                                              SUBREDDITS, is_trigger_comment, reply_to_said_comment
 from project_dir.mc_bc_bot.version import __version__
 import sys
 import praw
@@ -16,16 +16,14 @@ async def main(reddit=None, twitter=None, version=None, verbose=None):
     if verbose is True:
         logger = init_logger(verbose=True)
     if reddit is True:
-        comments = 0
+        skip_existing=False
         reddit_object = get_reddit_object()
         required_subreddits = reddit_object.subreddit("+".join(SUBREDDITS))
-        for comment in required_subreddits.stream.comments():
-            if await valid_comment(comment) is True:
-                if is_trigger_comment(comment) is False:
-                    print(comment.body)
-                    comments += 1
-                    if comments ==10:
-                        break
+        for comment in required_subreddits.stream.comments(skip_existing=skip_existing):
+            if is_trigger_comment(comment) is True:
+                if await valid_comment(comment) is True:
+                    logger.info(f"The following comment will be replied to {comment.body}")
+                    reply_to_said_comment(comment)
 
     if twitter is True:
         NotImplementedError

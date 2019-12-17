@@ -21,7 +21,7 @@ def get_argument_parser():
     return parser
 
 
-def init_logger(fname='mc_bc_bot.log', level=logging.DEBUG, verbose=False):
+def init_logger(fname='mc_bc_bot.log', level=logging.INFO, verbose=False):
     """ Init logger file where all output can be logged and classified
 
     :param fname: name of the log file
@@ -56,3 +56,8 @@ def init_logger(fname='mc_bc_bot.log', level=logging.DEBUG, verbose=False):
     # Prevent call forwarding to root logger
     logger.propagate = False
     return logger
+
+
+def get_content_directory():
+    """Returns the directory which contains all the content json files"""
+    return pathlib.Path(__file__).parents[1] / "content"
