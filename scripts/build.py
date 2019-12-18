@@ -491,7 +491,7 @@ def run_tests(python_prefix):
 
 
 def execute_bot(python_prefix):
-    """Execute the bot with flags --reddit --verbose"""
+    """Execute the bot with flags --reddit"""
     python_exec = get_python_bin_from_env(env_prefix=python_prefix)
 
     command = "{0} {1} --reddit".format(python_exec,  op.join(PKG_DIR, "project_dir", "mc_bc_bot", "mc_bc_bot.py"))

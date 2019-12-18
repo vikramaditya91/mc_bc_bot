@@ -39,13 +39,14 @@ if __name__ == "__main__":
     # Parse only arguments from 1 (strip the 0 which is the script name)
     arguments = argument_parser.parse_args(sys.argv[1:])
 
-    # Call the main with explicit arguments
-    asyncio.run(    main(
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main(
         reddit=arguments.reddit,
         twitter=arguments.twitter,
         version=arguments.version,
         verbose=arguments.verbose
     ))
+
     elapsed = time.perf_counter() - s
     print(f"{__file__} executed in {elapsed:0.2f} seconds.")
 
