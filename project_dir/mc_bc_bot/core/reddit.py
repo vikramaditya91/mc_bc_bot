@@ -3,6 +3,9 @@ import json
 import cachetools
 import logging
 import random
+import re
+import asyncio
+from praw.exceptions import APIException
 from project_dir.mc_bc_bot.version import __loose_version__
 from project_dir.mc_bc_bot.utils.general_utilities import get_content_directory
 
@@ -79,7 +82,7 @@ def construct_comment():
     comment += f"\n\n*{perp}* to *{victim}*"
     comment += f"\n\n{context}"
     comment += f"\n\n---\n\n"
-    comment += f"^[source](https://github.com/vikramaditya91/mc_bc_bot) ^| ^v{__loose_version__}"
+    comment += f"^[source-code](https://github.com/vikramaditya91/mc_bc_bot) ^| ^v{__loose_version__}"
     return comment
 
 
@@ -89,9 +92,26 @@ def is_trigger_comment(comment):
     return any(ele in comment.body.lower() for ele in get_triggers_from_json()['triggered_by'])
 
 
-def reply_to_said_comment(comment):
-    """Replies to the comment as it satisfied all the criteria"""
-    comment_to_reply = construct_comment()
-    comment.reply(comment_to_reply)
-    logger.info(f"{comment.author}'s comment was replied to at {comment.permalink}")
+async def reply_to_said_comment(comment, tries=2):
+    """Replies to the comment as it satisfied all the criteria.
+    Waits for the time to pass if you commented too quickly"""
+    if tries <= 0:
+        return
+    try:
+        tries = tries - 1
+        comment_to_reply = construct_comment()
+        comment.reply(comment_to_reply)
+        logger.info(f"{comment.author}'s comment was replied to at {comment.permalink}")
+    except APIException as e:
+        logger.info(f"Caught an exception with {e} while trying to post a comment")
+        minutes = re.findall("RATELIMIT: 'you are doing that too much. try again in (.*\d+) minutes", str(e))
+        seconds = re.findall("RATELIMIT: 'you are doing that too much. try again in (.*\d+) seconds", str(e))
+        minutes_to_wait = int(next(iter(minutes), 0))
+        seconds_to_wait = int(next(iter(seconds), 0))
+        buffer_wait_seconds = 60
+        logger.info(f"Shall asynchronously wait {minutes_to_wait} minutes"
+                    f" and {seconds_to_wait+buffer_wait_seconds} seconds")
+        await asyncio.sleep(60*int(minutes_to_wait)+int(seconds_to_wait)+buffer_wait_seconds)
+        reply_to_said_comment(comment, tries)
+
 

@@ -22,7 +22,7 @@ async def main(reddit=None, twitter=None, version=None, verbose=None):
             if is_trigger_comment(comment) is True:
                 if await valid_comment(comment) is True:
                     logger.info(f"The following comment will be replied to {comment.body}")
-                    reply_to_said_comment(comment)
+                    await reply_to_said_comment(comment)
 
     if twitter is True:
         NotImplementedError
