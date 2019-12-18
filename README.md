@@ -14,6 +14,7 @@ All you need to get started is a working Python on your machine
 
 Just run the build.py present inside the scripts directory
 ```
+cd mc_bc_bot
 python scripts\build.py
 ```
 This should create a conda environment in the same directory,
