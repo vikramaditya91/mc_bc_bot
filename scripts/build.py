@@ -149,7 +149,7 @@ def install_miniconda_linux(file_archive, location):
     # Create one single temp dir per execution
     location = op.join(location, 'build_env_linux')
     if op.exists(location):
-        rmtree(location)
+        shutil.rmtree(location)
 
     # Fix the execution flag
     logger.info("Fix exec flag...")
@@ -184,7 +184,7 @@ def install_miniconda_windows(file_archive, location):
     # Create one single temp dir per execution
     location = op.join(location, 'build_env_windows')
     if op.exists(location):
-        rmtree(location)
+        shutil.rmtree(location)
 
     # Install the root env in tmp
     logger.info("Installing miniconda in {0}...".format(location))
@@ -294,10 +294,8 @@ def install_pip_dependencies(python_prefix):
     """
     pip_req_dir = op.join(THIS_DIR)
 
-    if platform.system() == "Windows":
-        pip_req_file = op.join(pip_req_dir, 'pip_req_windows.txt')
-    else:
-        pip_req_file = op.join(pip_req_dir, 'pip_req_linux.txt')
+    pip_req_file = op.join(pip_req_dir, 'pip_requirements.txt')
+
 
     if op.exists(pip_req_file):
         logger.info("Installing additional dependencies through pip ...")
@@ -344,10 +342,8 @@ def make_conda_env(python_prefix):
         The path where to create the python environment.
 
     """
-    if platform.system() == "Windows":
-        requirement_file = "conda_req_windows.txt"
-    else:
-        requirement_file = "conda_req_linux.txt"
+
+    requirement_file = "conda_requirements.txt"
 
     logger.info("Installing conda requirements ...")
     conda_req_file = op.join(THIS_DIR, requirement_file)
@@ -362,47 +358,6 @@ def make_conda_env(python_prefix):
     install_pip_dependencies(python_prefix)
 
     return python_prefix
-
-
-def make_conda_package(python_install_path):
-    logger.info("Making conda package...")
-    conda_command = op.join(python_install_path, 'Scripts', 'conda')
-    dist_folder = op.join(OUT_DIR, 'dist', 'conda')
-    if op.exists(dist_folder):
-        rmtree(dist_folder)
-
-    conda_recipe_dir = "./"
-    python_version = "2.7"
-    cmd = "{0} build {1} --python {2} --channel conda-forge --no-anaconda-upload --output-folder={3}".format(conda_command, conda_recipe_dir, python_version, dist_folder)
-    code, out, err = run_command(cmd, cwd=THIS_DIR)
-    logger.info(out)
-    if code != 0:
-        logger.error(err)
-        raise RuntimeError("!!! Conda build failed to run")
-
-
-
-def rmtree(path):
-    def onerror(func, path, exc_info):
-        """
-        Error handler for ``shutil.rmtree``.
-
-        If the error is due to an access error (read only file)
-        it attempts to add write permission and then retries.
-
-        If the error is for another reason it re-raises the error.
-        Usage : ``shutil.rmtree(path, onerror=onerror)``
-        """
-        import stat
-        if not os.access(path, os.W_OK):
-            # Is the error an access error ?
-            os.chmod(path, stat.S_IWUSR)
-            func(path)
-        else:
-            logger.warning("Could not remove file: {0}".format(path))
-
-    if op.exists(path):
-        shutil.rmtree(path, onerror=onerror)
 
 
 def check_pip():
@@ -450,31 +405,6 @@ def get_environment_settings():
     }
     logger.debug("Current python env: {0}".format(env))
     return env
-
-
-def desired_python_in_conda():
-    u"""
-    Searches through the conda requirement to obtain the right version of python.
-    As we might have python 2 and 3 versions running at the same time,
-    this helps to set a different _tmp_conda_env_<python_main_ver>
-    :return: The major version of python (2 or 3)
-
-    If for some reason it could not find the python version,
-    it returns that the python version is 2 as a failsafe
-    """
-    if platform.system() == "Windows":
-        requirement_file = "conda_req_linux.txt"
-    else:
-        requirement_file = "conda_req_windows.txt"
-    conda_req_file = op.join(THIS_DIR, os.pardir, requirement_file)
-
-    with open(conda_req_file) as conda_req:
-        conda_req_list = conda_req.read().split("\n")
-    for item in conda_req_list:
-        if "python==" in item:
-            python_item = re.search('python==\d', item)
-            return python_item.group()[-1]
-    return "2" #Fail-safe
 
 
 @contextmanager
@@ -561,26 +491,11 @@ def run_tests(python_prefix):
 
 
 def execute_bot(python_prefix):
-    """Build up the application with pyinstaller.
-
-    Return the folder in which we generate the binaries.
-    """
-    get_python_bin_from_env(env_prefix=python_prefix)
-    command = "{0} ../".format(coverage_exec, PKG_DIR, setup_file)
-    logger.info("Test command : {0}".format(command))
+    """Execute the bot with flags --reddit --verbose"""
+    python_exec = get_python_bin_from_env(env_prefix=python_prefix)
+    command = "{0} ../project_dir/mc_bc_bot/mc_bc_bot.py --reddit --verbose".format(python_exec)
+    logger.info("Executing the command : {0}".format(command))
     run_local_env_command(python_prefix, command, cwd=PKG_DIR)
-
-
-def clean():
-    """Clean up some packaging files."""
-    folders_to_clean = [
-        op.join(THIS_DIR, '..', 'dist'),
-        op.join(THIS_DIR, '..', 'build'),
-        op.join(THIS_DIR, '..', 'numeca_admin_tool.egg-info'),
-    ]
-    for folder in folders_to_clean:
-        if op.exists(folder):
-            rmtree(folder)
 
 
 def release_environment(python_prefix):
@@ -605,7 +520,6 @@ def main():
         try:
             # run_tests(env_prefix)
             execute_bot(env_prefix)
-            clean()
             return 0
         except Exception as e:
             logger.error("At least one error occured during building.")

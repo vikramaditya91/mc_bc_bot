@@ -1,5 +1,4 @@
 import asyncio
-import time
 from project_dir.mc_bc_bot.utils.general_utilities import get_argument_parser, init_logger
 from project_dir.mc_bc_bot.core.reddit import get_reddit_object, valid_comment,\
                                               SUBREDDITS, is_trigger_comment, reply_to_said_comment
@@ -16,7 +15,7 @@ async def main(reddit=None, twitter=None, version=None, verbose=None):
     if verbose is True:
         logger = init_logger(verbose=True)
     if reddit is True:
-        skip_existing=False
+        skip_existing=True
         reddit_object = get_reddit_object()
         required_subreddits = reddit_object.subreddit("+".join(SUBREDDITS))
         for comment in required_subreddits.stream.comments(skip_existing=skip_existing):

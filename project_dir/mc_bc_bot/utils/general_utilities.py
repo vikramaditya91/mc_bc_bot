@@ -35,7 +35,7 @@ def init_logger(fname='mc_bc_bot.log', level=logging.INFO, verbose=False):
         log_folder.mkdir(parents=True, exist_ok=True)
 
     logging.basicConfig(level=level)
-    logger = logging.getLogger("numeca")
+    logger = logging.getLogger("mc_bc_bot")
     for handler in logger.handlers:
         logger.removeHandler(handler)
 

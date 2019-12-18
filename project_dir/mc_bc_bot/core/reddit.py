@@ -1,14 +1,12 @@
 import praw
 import json
 import cachetools
-import pathlib
 import logging
-import asyncio
 import random
 from project_dir.mc_bc_bot.version import __loose_version__
 from project_dir.mc_bc_bot.utils.general_utilities import get_content_directory
 
-SUBREDDITS = ['EmergingCricket']
+SUBREDDITS = ['testingground4bots']
 cache = cachetools.TTLCache(maxsize=100, ttl=3600)
 
 logger = logging.getLogger(__name__)
@@ -80,7 +78,7 @@ def construct_comment():
     comment = quote.upper()
     comment += f"\n\n*{perp}* to *{victim}*"
     comment += f"\n\n{context}"
-    comment += f"\n\n---"
+    comment += f"\n\n---\n\n"
     comment += f"^[source](https://github.com/vikramaditya91/mc_bc_bot) ^| ^v{__loose_version__}"
     return comment
 
@@ -88,7 +86,7 @@ def construct_comment():
 def is_trigger_comment(comment):
     """Verifies if the comment is one of the bot triggers"""
     logging.info(f"Checking if {comment.body} is a trigger comment")
-    return any(ele in comment.body for ele in get_triggers_from_json()['triggered_by'])
+    return any(ele in comment.body.lower() for ele in get_triggers_from_json()['triggered_by'])
 
 
 def reply_to_said_comment(comment):
