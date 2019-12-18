@@ -493,9 +493,10 @@ def run_tests(python_prefix):
 def execute_bot(python_prefix):
     """Execute the bot with flags --reddit --verbose"""
     python_exec = get_python_bin_from_env(env_prefix=python_prefix)
-    command = "{0} ../project_dir/mc_bc_bot/mc_bc_bot.py --reddit --verbose".format(python_exec)
+
+    command = "{0} {1} --reddit --verbose".format(python_exec,  op.join(PKG_DIR, "project_dir", "mc_bc_bot", "mc_bc_bot.py"))
     logger.info("Executing the command : {0}".format(command))
-    run_local_env_command(python_prefix, command, cwd=PKG_DIR)
+    run_command(command, cwd=PKG_DIR)
 
 
 def release_environment(python_prefix):
@@ -522,7 +523,7 @@ def main():
             execute_bot(env_prefix)
             return 0
         except Exception as e:
-            logger.error("At least one error occured during building.")
+            logger.error("At least one error occurred during building.")
             logger.error("Error : {0}".format(e))
             return 1
 

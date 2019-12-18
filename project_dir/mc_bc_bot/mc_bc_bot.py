@@ -4,7 +4,6 @@ from project_dir.mc_bc_bot.core.reddit import get_reddit_object, valid_comment,\
                                               SUBREDDITS, is_trigger_comment, reply_to_said_comment
 from project_dir.mc_bc_bot.version import __version__
 import sys
-import praw
 import logging
 
 
