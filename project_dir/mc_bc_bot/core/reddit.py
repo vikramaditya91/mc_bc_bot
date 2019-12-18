@@ -76,6 +76,7 @@ def get_all_sledges():
 
 
 def construct_comment():
+    """Randomly selects a sledge and writes in the markdown format"""
     quote, [perp, victim, context] = random.choice(list(get_all_sledges().items()))
     logger.info(f"The following will be the reply {quote}")
     comment = quote.upper()
