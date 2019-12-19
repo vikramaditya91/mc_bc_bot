@@ -125,12 +125,12 @@ class CommentStream:
 
     def __enter__(self):
         try:
-            next(self.generator)
+            return next(self.generator)
         except RequestException as e:
             if "Failed to establish a new connection" in str(e):
                 time.sleep(10)
                 self.generator = self.subreddits.stream.comments(skip_existing=True)
-                next(self.generator)
+                return next(self.generator)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
