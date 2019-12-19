@@ -4,7 +4,9 @@ import cachetools
 import logging
 import random
 import re
+import time
 import asyncio
+from prawcore.exceptions import RequestException
 from praw.exceptions import APIException
 from project_dir.mc_bc_bot.version import __loose_version__
 from project_dir.mc_bc_bot.utils.general_utilities import get_content_directory
@@ -19,7 +21,6 @@ def get_reddit_object():
     """Returns the praw's Reddit object taking the credentials from the praw.ini file"""
     logger.info("Logging into the bot with the Praw.ini credentials")
     return praw.Reddit('mc_bc_bot', user_agent='MCBCBOT (by /u/vikramaditya91)')
-
 
 
 def get_valid_subreddits(reddit):
@@ -114,5 +115,24 @@ async def reply_to_said_comment(comment, tries=2):
                     f" and {seconds_to_wait+buffer_wait_seconds} seconds")
         await asyncio.sleep(60*int(minutes_to_wait)+int(seconds_to_wait)+buffer_wait_seconds)
         reply_to_said_comment(comment, tries)
+
+
+class CommentStream:
+    """Exception handling comment streamer"""
+    def __init__(self, subreddits):
+        self.subreddits = subreddits
+        self.generator = subreddits.stream.comments(skip_existing=True)
+
+    def __enter__(self):
+        try:
+            next(self.generator)
+        except RequestException as e:
+            if "Failed to establish a new connection" in str(e):
+                time.sleep(10)
+                self.generator = self.subreddits.stream.comments(skip_existing=True)
+                next(self.generator)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
 
 
