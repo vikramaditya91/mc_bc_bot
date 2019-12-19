@@ -1,8 +1,6 @@
 import asyncio
 from project_dir.mc_bc_bot.utils.general_utilities import get_argument_parser, init_logger
-from project_dir.mc_bc_bot.core.reddit import get_reddit_object, valid_comment,\
-                                              SUBREDDITS, is_trigger_comment, reply_to_said_comment,\
-                                              CommentStream
+from project_dir.mc_bc_bot.core.reddit import get_reddit_object, SUBREDDITS, comment_reply_maker
 from project_dir.mc_bc_bot.version import __version__
 import sys
 import logging
@@ -17,11 +15,7 @@ async def main(reddit=None, twitter=None, version=None, verbose=None):
     if reddit is True:
         reddit_object = get_reddit_object()
         required_subreddits = reddit_object.subreddit("+".join(SUBREDDITS))
-        with CommentStream(required_subreddits) as comment:
-            if is_trigger_comment(comment) is True:
-                if await valid_comment(comment) is True:
-                    logger.info(f"The following comment will be replied to {comment.body}")
-                    await reply_to_said_comment(comment)
+        await comment_reply_maker(required_subreddits)
 
     if twitter is True:
         NotImplementedError

@@ -113,26 +113,20 @@ async def reply_to_said_comment(comment, tries=2):
         buffer_wait_seconds = 60
         logger.info(f"Shall asynchronously wait {minutes_to_wait} minutes"
                     f" and {seconds_to_wait+buffer_wait_seconds} seconds")
-        await asyncio.sleep(60*int(minutes_to_wait)+int(seconds_to_wait)+buffer_wait_seconds)
+        await asyncio.sleep(60*minutes_to_wait+seconds_to_wait+buffer_wait_seconds)
         reply_to_said_comment(comment, tries)
 
 
-class CommentStream:
-    """Exception handling comment streamer"""
-    def __init__(self, subreddits):
-        self.subreddits = subreddits
-        self.generator = subreddits.stream.comments(skip_existing=True)
-
-    def __enter__(self):
-        try:
-            return next(self.generator)
-        except RequestException as e:
-            if "Failed to establish a new connection" in str(e):
-                time.sleep(10)
-                self.generator = self.subreddits.stream.comments(skip_existing=True)
-                return next(self.generator)
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
-
-
+async def comment_reply_maker(required_subreddits):
+    """Replies to the comments on the given subredits.
+    Carries out an infinite loop in case of network failure"""
+    try:
+        for comment in required_subreddits.stream.comments(skip_existing=True):
+            if is_trigger_comment(comment) is True:
+                if await valid_comment(comment) is True:
+                    logger.info(f"The following comment will be replied to {comment.body}")
+                    await reply_to_said_comment(comment)
+    except RequestException as e:
+        if "Failed to establish a new connection" in str(e):
+            time.sleep(2)
+            await comment_reply_maker(required_subreddits)
