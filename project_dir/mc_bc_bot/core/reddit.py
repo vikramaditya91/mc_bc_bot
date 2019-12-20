@@ -86,7 +86,7 @@ def construct_comment():
     comment += f"\n\n---\n\n"
     comment += f"^[source-code](https://github.com/vikramaditya91/mc_bc_bot)" \
         f" ^|" \
-        f" ^v[opt-out](https://reddit.com/message/compose?to=mc_bc_bot&message=Excludeme&subject=Excludeme)" \
+        f" ^[opt-out](https://reddit.com/message/compose?to=mc_bc_bot&message=Excludeme&subject=Excludeme)" \
         f" ^|" \
         f" ^[PM](https://www.reddit.com/message/compose?to=vikramaditya91)" \
         f" ^|" \
