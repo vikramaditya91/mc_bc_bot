@@ -84,7 +84,13 @@ def construct_comment():
     comment += f"\n\n*{perp}* to *{victim}*"
     comment += f"\n\n{context}"
     comment += f"\n\n---\n\n"
-    comment += f"^[source-code](https://github.com/vikramaditya91/mc_bc_bot) ^| ^v{__loose_version__}"
+    comment += f"^[source-code](https://github.com/vikramaditya91/mc_bc_bot)" \
+        f" ^|" \
+        f" ^v[opt-out](https://reddit.com/message/compose?to=mc_bc_bot&message=Excludeme&subject=Excludeme)" \
+        f" ^|" \
+        f" ^[PM](https://www.reddit.com/message/compose?to=vikramaditya91)" \
+        f" ^|" \
+        f" ^v{__loose_version__}"
     return comment
 
 
