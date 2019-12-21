@@ -11,7 +11,7 @@ from praw.exceptions import APIException
 from project_dir.mc_bc_bot.version import __loose_version__
 from project_dir.mc_bc_bot.utils.general_utilities import get_content_directory
 
-SUBREDDITS = ['testingground4bots']
+SUBREDDITS = ['testingground4bots', 'CricketShitpost']
 cache = cachetools.TTLCache(maxsize=100, ttl=3600)
 
 logger = logging.getLogger(__name__)
