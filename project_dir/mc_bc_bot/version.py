@@ -1,7 +1,7 @@
 VERSION_MAJOR = 1
 VERSION_MINOR = 0
 VERSION_PATCH = 0
-VERSION_EXTRA = 'a0'
+VERSION_EXTRA = 'a1'
 
 __version__ = "{}.{}.{}".format(VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH)
 __loose_version__ = "{}.{}".format(VERSION_MAJOR, VERSION_MINOR)
