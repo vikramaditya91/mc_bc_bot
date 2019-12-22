@@ -11,7 +11,7 @@ from praw.exceptions import APIException
 from project_dir.mc_bc_bot.version import __loose_version__
 from project_dir.mc_bc_bot.utils.general_utilities import get_content_directory
 
-SUBREDDITS = ['testingground4bots', 'CricketShitpost', 'Cricket']
+SUBREDDITS = ['testingground4bots']
 cache = cachetools.TTLCache(maxsize=100, ttl=3600)
 
 logger = logging.getLogger(__name__)
@@ -69,6 +69,21 @@ async def valid_comment(comment):
     return False
 
 
+async def ensure_comment_is_not_child(comment):
+    """
+    Returns True if the immediate parent is NOT the mc_bc_bot.
+    Returns False if everything else
+    """
+    logger.info(f"Checking if the comment {comment.body} is a child of the mc_bc_bot comment")
+    try:
+        if comment.parent().author.name == "mc_bc_bot":
+            return False
+        return True
+    except AttributeError as e:
+        if "'Submission' object has no attribute 'parent'" in str(e):
+            return True
+
+@cachetools.cached(cache)
 def get_all_sledges():
     """Parse the json file for a random sledge
     :return A dict of sledges"""
